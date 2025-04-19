@@ -55,7 +55,7 @@ U  /"\  u U|  _"\ uU |  _"\ u     ___     |"|           /"| U /"/_ u
                 new Task(12, "Physics Fields Review", Task.Subject.PHYSICS, "Apr. 19 17:00", 60).markDone(),
                 new Task(13, "Physics Exam Qs (Fields & Kinetics)", Task.Subject.PHYSICS, "Apr. 19 20:10", 60).markDone(),
                 new Task(14, "German Writings review / review words", Task.Subject.GERMAN, "Apr. 19 21:30", 55).markDone(),
-                new Task(15, "Physics Exam Qs A1~3", Task.Subject.PHYSICS, "Apr. 19 22:40", 30),
+                new Task(15, "Physics Exam Qs A1~3", Task.Subject.PHYSICS, "Apr. 19 22:40", 30).markDone(),
 
 /*
       .o.                            o8o  oooo        .oooo.     .oooo.
@@ -118,14 +118,14 @@ o88o     o8888o  888bod8P' d888b    o888o o888o     8888888888  `Y8bd8P'
 
         tasks.stream().collect(Collectors.groupingBy(Task::getStartDate, TreeMap::new, Collectors.toList())).forEach((localDate, tasksOfDate) -> {
             md.append("## 📅 Study Schedule ").append(localDate.format(DateTimeFormatter.ofPattern("MMM. dd"))).append("\n\n");
-            int doneNumber = (int) tasksOfDate.stream().filter(t -> t.getStatus().equals(Task.TaskStatus.DONE) || t.getStatus().equals(Task.TaskStatus.IN_PROGRESS)).count();
-            int donePercentage = 10 * doneNumber / tasksOfDate.size();
-            System.out.println(doneNumber);
-            System.out.println(tasksOfDate.size());
-            System.out.println(donePercentage);
-            System.out.println(10-donePercentage);
-            System.out.println();
-            md.append("### Day Progress: [ ").append("█".repeat(donePercentage)).append("░".repeat(10-donePercentage)).append(" ]\n\n");
+
+            int totalMinutes = tasksOfDate.stream().map(t -> (int) t.getDuration().toMinutes()).mapToInt(Integer::intValue).sum();
+            int doneMinutes = tasksOfDate.stream().filter(t -> t.getStatus().equals(Task.TaskStatus.DONE) || t.getStatus().equals(Task.TaskStatus.IN_PROGRESS)).map(t -> (int) t.getDuration().toMinutes()).mapToInt(Integer::intValue).sum();
+
+            int donePercentage = 10 * doneMinutes / totalMinutes;
+
+//            md.append("> #### Day Progress: [ ").append("▰".repeat(donePercentage)).append("▱".repeat(10-donePercentage)).append(" ]\n\n");
+            md.append("![](https://geps.dev/progress/").append((donePercentage*10)).append(")\n\n");
             md.append("| Task | Subject | Start Time | End Time | Duration | Status |\n");
             md.append("|------|:-------:|:----------:|:--------:|:--------:|:------:|\n");
 

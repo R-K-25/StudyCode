@@ -1,13 +1,13 @@
 ## 📅 Study Schedule Apr. 15
 
-### Day Progress: [ ░░░░░░░░░░ ]
+![](https://geps.dev/progress/0)
 
 | Task | Subject | Start Time | End Time | Duration | Status |
 |------|:-------:|:----------:|:--------:|:--------:|:------:|
 | 2024 Nov. SAQ write               | Psychology        | 23:00             | 23:40             | 40 mins    | <span style='padding:4px 10px;border-radius: 25px;background-color:#dc3545;color:#f0f0f0'>Uncompleted</span> |
 ## 📅 Study Schedule Apr. 16
 
-### Day Progress: [ ░░░░░░░░░░ ]
+![](https://geps.dev/progress/0)
 
 | Task | Subject | Start Time | End Time | Duration | Status |
 |------|:-------:|:----------:|:--------:|:--------:|:------:|
@@ -17,7 +17,7 @@
 | Physics C1~5 Review               | Physics           | 17:50             | 19:10             | 1 hr 20 mins | <span style='padding:4px 10px;border-radius: 25px;background-color:#dc3545;color:#f0f0f0'>Uncompleted</span> |
 ## 📅 Study Schedule Apr. 17
 
-### Day Progress: [ █████░░░░░ ]
+![](https://geps.dev/progress/50)
 
 | Task | Subject | Start Time | End Time | Duration | Status |
 |------|:-------:|:----------:|:--------:|:--------:|:------:|
@@ -29,17 +29,17 @@
 | Physics A4 Continued              | Physics           | 21:40             | 22:20             | 40 mins    | <span style='padding:4px 10px;border-radius: 25px;background-color:#dc3545;color:#f0f0f0'>Uncompleted</span> |
 ## 📅 Study Schedule Apr. 19
 
-### Day Progress: [ ███████░░░ ]
+![](https://geps.dev/progress/100)
 
 | Task | Subject | Start Time | End Time | Duration | Status |
 |------|:-------:|:----------:|:--------:|:--------:|:------:|
 | Physics Fields Review             | Physics           | 17:00             | 18:00             | 1 hr       | <span style='padding:4px 10px;border-radius: 25px;background-color:#28a745;color:#f0f0f0'>Done</span> |
 | Physics Exam Qs (Fields & Kinetics) | Physics           | 20:10             | 21:10             | 1 hr       | <span style='padding:4px 10px;border-radius: 25px;background-color:#28a745;color:#f0f0f0'>Done</span> |
 | German Writings review / review words | German            | 21:30             | 22:25             | 55 mins    | <span style='padding:4px 10px;border-radius: 25px;background-color:#28a745;color:#f0f0f0'>Done</span> |
-| Physics Exam Qs A1~3              | Physics           | 22:40             | 23:10             | 30 mins    | <span style='padding:4px 10px;border-radius: 25px;background-color:#6c757d;color:#f0f0f0'>Not started</span> |
+| Physics Exam Qs A1~3              | Physics           | 22:40             | 23:10             | 30 mins    | <span style='padding:4px 10px;border-radius: 25px;background-color:#ffc107;color:#212529'>In progress</span> |
 ## 📅 Study Schedule Apr. 20
 
-### Day Progress: [ ░░░░░░░░░░ ]
+![](https://geps.dev/progress/0)
 
 | Task | Subject | Start Time | End Time | Duration | Status |
 |------|:-------:|:----------:|:--------:|:--------:|:------:|
