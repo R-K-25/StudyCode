@@ -3,9 +3,7 @@ package me.mine.studying;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,7 +41,38 @@ U  /"\  u U|  _"\ uU |  _"\ u     ___     |"|           /"| U /"/_ u
                 new Task(8, "Physics A4 Review", Task.Subject.PHYSICS, "Apr. 17 16:10", 50).markDone(),
                 new Task(9, "Physics Fields Review", Task.Subject.PHYSICS, "Apr. 17 18:15", 60),
                 new Task(10, "Physics Fields Continued", Task.Subject.PHYSICS, "Apr. 17 20:55", 40),
-                new Task(11, "Physics A4 Continued", Task.Subject.PHYSICS, "Apr. 17 21:40", 40)
+                new Task(11, "Physics A4 Continued", Task.Subject.PHYSICS, "Apr. 17 21:40", 40),
+
+
+/*
+         .                    .        .   ___
+    /|    \,___, .___  `  |       /|  /   \
+   /  \   |    \ /   \ |  |        |  `---|
+  /---'\  |    | |   ' |  |        |      |
+,'      \ |`---' /     / /\__     _|_ `---'
+          \
+ */
+                new Task(12, "Physics Fields Review", Task.Subject.PHYSICS, "Apr. 19 17:00", 60).markDone(),
+                new Task(13, "Physics Exam Qs (Fields & Kinetics)", Task.Subject.PHYSICS, "Apr. 19 20:10", 60).markDone(),
+                new Task(14, "German Writings review / review words", Task.Subject.GERMAN, "Apr. 19 21:30", 55).markDone(),
+                new Task(15, "Physics Exam Qs A1~3", Task.Subject.PHYSICS, "Apr. 19 22:40", 30),
+
+/*
+      .o.                            o8o  oooo        .oooo.     .oooo.
+     .888.                           `"'  `888      .dP""Y88b   d8P'`Y8b
+    .8"888.     oo.ooooo.  oooo d8b oooo   888            ]8P' 888    888
+   .8' `888.     888' `88b `888""8P `888   888          .d8P'  888    888
+  .88ooo8888.    888   888  888      888   888        .dP'     888    888
+ .8'     `888.   888   888  888      888   888      .oP     .o `88b  d88'
+o88o     o8888o  888bod8P' d888b    o888o o888o     8888888888  `Y8bd8P'
+                 888
+                o888o
+ */
+                new Task(16, "Math Nov. 22 Paper 1", Task.Subject.MATH, "Apr. 20 09:30",120),
+                new Task(17, "Math Nov. 22 Paper 3", Task.Subject.MATH, "Apr. 20 13:10", 60),
+                new Task(18, "Math Nov. 21 Paper 1", Task.Subject.MATH, "Apr. 20 14:30", 120),
+                new Task(19, "Math Nov. 22 Paper 2", Task.Subject.MATH, "Apr. 20 18:20", 90)
+
         ));
 
         tasks.forEach(task -> {
@@ -89,18 +118,25 @@ U  /"\  u U|  _"\ uU |  _"\ u     ___     |"|           /"| U /"/_ u
 
         tasks.stream().collect(Collectors.groupingBy(Task::getStartDate, TreeMap::new, Collectors.toList())).forEach((localDate, tasksOfDate) -> {
             md.append("## 📅 Study Schedule ").append(localDate.format(DateTimeFormatter.ofPattern("MMM. dd"))).append("\n\n");
-            md.append("| Task | Subject | Start Time | End Time | Duration | Status | Priority |\n");
-            md.append("|------|:-------:|:----------:|:--------:|:--------:|:------:|:--:|\n");
+            int doneNumber = (int) tasksOfDate.stream().filter(t -> t.getStatus().equals(Task.TaskStatus.DONE) || t.getStatus().equals(Task.TaskStatus.IN_PROGRESS)).count();
+            int donePercentage = 10 * doneNumber / tasksOfDate.size();
+            System.out.println(doneNumber);
+            System.out.println(tasksOfDate.size());
+            System.out.println(donePercentage);
+            System.out.println(10-donePercentage);
+            System.out.println();
+            md.append("### Day Progress: [ ").append("█".repeat(donePercentage)).append("░".repeat(10-donePercentage)).append(" ]\n\n");
+            md.append("| Task | Subject | Start Time | End Time | Duration | Status |\n");
+            md.append("|------|:-------:|:----------:|:--------:|:--------:|:------:|\n");
 
             for (Task task : tasksOfDate) {
-                md.append(String.format("| %-33s | %-17s | %-17s | %-17s | %-10s | %s | %s |\n",
+                md.append(String.format("| %-33s | %-17s | %-17s | %-17s | %-10s | %s |\n",
                         task.getName(),
                         task.getSubject().getSubjectName(),
                         task.getStartDateTimeFormatted(),
                         DateTimeFormatter.ofPattern("HH:mm").format(task.getStartDateTime().plus(task.getDuration())),
                         formatDuration(task.getDuration()),
-                        formatString(task.getStatus().getName(), "padding:4px 10px;border-radius: 25px;background-color:" + task.getStatus().getBackgroundColor() + ";color:" + task.getStatus().getColor()),
-                        task.getPriority().getName()
+                        formatString(task.getStatus().getName(), "padding:4px 10px;border-radius: 25px;background-color:" + task.getStatus().getBackgroundColor() + ";color:" + task.getStatus().getColor())
                 ));
             }
         });
