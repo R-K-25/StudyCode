@@ -1,6 +1,5 @@
 package me.mine.studying;
 
-import javax.security.auth.Subject;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,7 +15,7 @@ public class Task {
     private Duration duration;
     private TaskStatus status;
     private TaskPriority priority;
-
+    private static int startingId = 1;
 
     /**
      * Constructor for Task class
@@ -30,6 +29,7 @@ public class Task {
      */
     public Task(int id, String name, Subject subject, String startDateTime, int durationMinute, TaskStatus status, TaskPriority priority) {
         this.id = id;
+        startingId++;
         this.name = name;
         this.subject = subject;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM. dd HH:mm yyyy", Locale.ENGLISH);
@@ -41,6 +41,10 @@ public class Task {
 
     public Task(int id, String name, Subject subject, String startDateTime, int durationMinute) {
         this(id, name, subject, startDateTime, durationMinute, TaskStatus.NOT_STARTED, TaskPriority.MEDIUM);
+    }
+
+    public Task(String name, Subject subject, String startDateTime, int durationMinute) {
+        this(startingId, name, subject, startDateTime, durationMinute);
     }
 
     public Task markDone() {

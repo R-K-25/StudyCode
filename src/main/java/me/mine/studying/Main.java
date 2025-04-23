@@ -68,10 +68,73 @@ o88o     o8888o  888bod8P' d888b    o888o o888o     8888888888  `Y8bd8P'
                  888
                 o888o
  */
-                new Task(16, "Math Nov. 22 Paper 1", Task.Subject.MATH, "Apr. 20 09:30",120),
-                new Task(17, "Math Nov. 22 Paper 3", Task.Subject.MATH, "Apr. 20 13:10", 60),
-                new Task(18, "Math Nov. 21 Paper 1", Task.Subject.MATH, "Apr. 20 14:30", 120),
-                new Task(19, "Math Nov. 22 Paper 2", Task.Subject.MATH, "Apr. 20 18:20", 90)
+                new Task(16, "Math Nov. 22 Paper 1", Task.Subject.MATH, "Apr. 20 11:00",120).markDone(),
+                new Task(17, "Math Nov. 22 Paper 1 Review", Task.Subject.MATH, "Apr. 20 13:15", 15),
+                new Task(18, "Math Nov. 22 Paper 2", Task.Subject.MATH, "Apr. 20 14:30", 90),
+                new Task(19, "Math Nov. 22 Paper 3", Task.Subject.MATH, "Apr. 20 18:20", 60),
+/*  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.    .----------------.  .----------------.  */
+/* | .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |  | .--------------. || .--------------. | */
+/* | |      __      | || |   ______     | || |  _______     | || |     _____    | || |   _____      | |  | |    _____     | || |    ______    | | */
+/* | |     /  \     | || |  |_   __ \   | || | |_   __ \    | || |    |_   _|   | || |  |_   _|     | |  | |   / ___ `.   | || |   / ____ `.  | | */
+/* | |    / /\ \    | || |    | |__) |  | || |   | |__) |   | || |      | |     | || |    | |       | |  | |  |_/___) |   | || |   `'  __) |  | | */
+/* | |   / ____ \   | || |    |  ___/   | || |   |  __ /    | || |      | |     | || |    | |   _   | |  | |   .'____.'   | || |   _  |__ '.  | | */
+/* | | _/ /    \ \_ | || |   _| |_      | || |  _| |  \ \_  | || |     _| |_    | || |   _| |__/ |  | |  | |  / /____     | || |  | \____) |  | | */
+/* | ||____|  |____|| || |  |_____|     | || | |____| |___| | || |    |_____|   | || |  |________|  | |  | |  |_______|   | || |   \______.'  | | */
+/* | |              | || |              | || |              | || |              | || |              | |  | |              | || |              | | */
+/* | '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |  | '--------------' || '--------------' | */
+/*  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'    '----------------'  '----------------'  */
+                /*
+                60 min - 15 min
+                 */
+
+                // Session #1
+                new Task("Physics Pre-mock P1b", Task.Subject.PHYSICS, "Apr. 23 07:20", 10),
+                new Task("Physics Flashcards 10 key Qs", Task.Subject.PHYSICS, "Apr. 23 07:30", 5).markDone(),
+                new Task("Physics A2 Review Qs (x2)", Task.Subject.PHYSICS, "Apr. 23 07:35", 65).markDone(),
+
+                // Session #2
+                new Task("Physics B1~4 Review Qs", Task.Subject.PHYSICS, "Apr. 23 08:55", 60).markDone(),
+
+                // Session #3
+                new Task("Physics C1 timed quiz", Task.Subject.PHYSICS, "Apr. 23 10:10", 5).markDone(),
+                new Task("Physics C1 SHM Review Qs", Task.Subject.PHYSICS, "Apr. 23 10:15", 25).markDone(),
+                new Task("Physics C2~3 Review Qs", Task.Subject.PHYSICS, "Apr. 23 10:40", 30).markDone(),
+
+                // Session #4
+                new Task("Physics C4 Review Qs", Task.Subject.PHYSICS, "Apr. 23 11:25", 60).inProgress(),
+
+                // Lunch
+
+                // Session #5
+                new Task("Physics Nuclear Form Qs", Task.Subject.PHYSICS, "Apr. 23 13:45", 40),
+                new Task("Physics Photoelectric effect Qs", Task.Subject.PHYSICS, "Apr. 23 14:25", 20),
+
+                // Session #6
+                new Task("Physics E3 Decay Qs", Task.Subject.PHYSICS, "Apr. 23 15:00", 60),
+
+                // 45 - 15
+
+                // Session #7
+                new Task("Astrophysics Qs", Task.Subject.PHYSICS, "Apr. 23 16:30", 30),
+                new Task("Physics E5 Review Qs", Task.Subject.PHYSICS, "Apr. 23 17:10", 50),
+
+
+                // Session #8
+                new Task("Review Electromagnetism Extension Sheet", Task.Subject.PHYSICS, "Apr. 23 18:10", 25),
+
+
+                // DINNER
+
+                // Session #9
+                new Task("Physics D1~4 Practice Qs", Task.Subject.PHYSICS, "Apr. 23 20:20", 45),
+
+                // Session #10
+                new Task("Physics D4 Example Exam Qs", Task.Subject.PHYSICS, "Apr. 23 21:20", 45),
+
+                // Session #11
+                new Task("Specimen Paper 2", Task.Subject.PHYSICS, "Apr. 23 22:20", 150)
+
+
 
         ));
 
@@ -119,13 +182,16 @@ o88o     o8888o  888bod8P' d888b    o888o o888o     8888888888  `Y8bd8P'
         tasks.stream().collect(Collectors.groupingBy(Task::getStartDate, TreeMap::new, Collectors.toList())).forEach((localDate, tasksOfDate) -> {
             md.append("## 📅 Study Schedule ").append(localDate.format(DateTimeFormatter.ofPattern("MMM. dd"))).append("\n\n");
 
-            int totalMinutes = tasksOfDate.stream().map(t -> (int) t.getDuration().toMinutes()).mapToInt(Integer::intValue).sum();
-            int doneMinutes = tasksOfDate.stream().filter(t -> t.getStatus().equals(Task.TaskStatus.DONE) || t.getStatus().equals(Task.TaskStatus.IN_PROGRESS)).map(t -> (int) t.getDuration().toMinutes()).mapToInt(Integer::intValue).sum();
+            long totalMinutes = tasksOfDate.stream().map(t -> t.getDuration().toMinutes()).mapToLong(Long::longValue).sum();
+            long doneMinutes = tasksOfDate.stream().filter(t -> t.getStatus().equals(Task.TaskStatus.DONE) || t.getStatus().equals(Task.TaskStatus.IN_PROGRESS)).map(t -> t.getDuration().toMinutes()).mapToLong(Long::longValue).sum();
+            System.out.println();
+            System.out.println(totalMinutes);
+            System.out.println(doneMinutes);
 
-            int donePercentage = 10 * doneMinutes / totalMinutes;
-
+            int donePercentage = Math.round((float) (100.0 * doneMinutes / totalMinutes));
+            System.out.println(donePercentage);
 //            md.append("> #### Day Progress: [ ").append("▰".repeat(donePercentage)).append("▱".repeat(10-donePercentage)).append(" ]\n\n");
-            md.append("![](https://geps.dev/progress/").append((donePercentage*10)).append(")\n\n");
+            md.append("![](https://geps.dev/progress/").append((donePercentage)).append(")\n\n");
             md.append("| Task | Subject | Start Time | End Time | Duration | Status |\n");
             md.append("|------|:-------:|:----------:|:--------:|:--------:|:------:|\n");
 
